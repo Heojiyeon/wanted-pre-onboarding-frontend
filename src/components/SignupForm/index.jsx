@@ -1,14 +1,26 @@
 import { useState } from "react";
+import { baseRequest } from "../../apis/core";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const checkValues = e => {
+  const checkValues = async e => {
     e.preventDefault();
+    console.log(baseRequest);
     if (password.length < 8) {
       alert("8자 이상 작성해주세요!");
     } else {
-      console.log("제출 되었습니다.", e.target[0].value, e.target[1].value);
+      try {
+        await baseRequest.post("/auth/signup", {
+          email: e.target[0].value,
+          password: e.target[1].value,
+        });
+        navigate("/");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
