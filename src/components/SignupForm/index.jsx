@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { baseRequest } from "../../apis/core";
 import { useNavigate } from "react-router-dom";
+import { baseRequest } from "../../apis/core";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
