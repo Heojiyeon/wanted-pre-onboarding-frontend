@@ -24,7 +24,7 @@ export default function SignupForm() {
         email,
         password,
       });
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       console.error(error);
     }
