@@ -6,7 +6,7 @@ export default function TodoList(list) {
       {DUMMY.length !== 0 &&
         DUMMY.map(todo => {
           return (
-            <li>
+            <li key={todo}>
               <label>
                 <input type="checkbox" />
                 <span>{todo}</span>
