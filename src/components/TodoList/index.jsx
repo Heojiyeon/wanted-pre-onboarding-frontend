@@ -4,6 +4,24 @@ import { getAccessToken } from "../../utils/handleAccessToken";
 
 export default function TodoList() {
   const [list, setList] = useState("");
+  const [token, setToken] = useState("");
+
+  const updateTodo = id => {
+    console.log("update todo", id);
+  };
+
+  const deleteTodo = id => {
+    console.log("delete todo", id);
+    try {
+      baseRequest.delete(`/todos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getTodo = async accessToken => {
     try {
@@ -26,9 +44,10 @@ export default function TodoList() {
     const token = getAccessToken("access_token");
     if (token) {
       getTodo(token);
+      setToken(token);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
 
   return (
     <ul>
@@ -40,6 +59,16 @@ export default function TodoList() {
                 <input type="checkbox" />
                 <span>{todo.todo}</span>
               </label>
+              <button
+                data-testid="modify-button"
+                onClick={() => updateTodo(todo.id)}>
+                수정
+              </button>
+              <button
+                data-testid="delete-button"
+                onClick={() => deleteTodo(todo.id)}>
+                삭제
+              </button>
             </li>
           );
         })}
