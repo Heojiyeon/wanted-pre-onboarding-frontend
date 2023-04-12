@@ -18,9 +18,11 @@ export default function TodoForm({ accessToken }) {
         }
       );
     } catch (error) {
-      console.error(error);
+      alert("올바르게 작성해주세요!");
     }
+    e.target[0].value = "";
   };
+
   return (
     <form onSubmit={e => handleTodo(e)}>
       <input data-testid="new-todo-input" />
