@@ -11,13 +11,16 @@ export default function TodoList() {
   };
 
   const deleteTodo = id => {
-    console.log("delete todo", id);
     try {
-      baseRequest.delete(`/todos/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      baseRequest
+        .delete(`/todos/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(() => {
+          getTodo(token);
+        });
     } catch (error) {
       console.error(error);
     }
