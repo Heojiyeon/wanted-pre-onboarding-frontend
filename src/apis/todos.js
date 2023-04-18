@@ -34,4 +34,17 @@ const getTodos = async accessToken => {
   }
 };
 
-export { postTodo, getTodos };
+const deleteTodo = async (id, accessToken) => {
+  try {
+    const response = await baseRequest.delete(`/todos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.status;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { postTodo, getTodos, deleteTodo };

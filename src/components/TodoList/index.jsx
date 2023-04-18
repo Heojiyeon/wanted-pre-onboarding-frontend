@@ -26,6 +26,7 @@ export default function TodoList({ accessToken, newTodo }) {
               currTodo={todo}
               currCompleted={todo.isCompleted}
               accessToken={accessToken}
+              setList={setList}
             />
           );
         })}

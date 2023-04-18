@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { baseRequest } from "../../apis/core";
-import { getTodos } from "../../apis/todos";
+import { getTodos, deleteTodo } from "../../apis/todos";
 
-export default function TodoItem({ currTodo, accessToken }) {
+export default function TodoItem({ currTodo, accessToken, setList }) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
   const [updatedTodo, setUpdatedTodo] = useState(currTodo.todo);
   const [edited, setEdited] = useState(false);
@@ -30,19 +30,12 @@ export default function TodoItem({ currTodo, accessToken }) {
     }
   };
 
-  const deleteTodo = id => {
-    try {
-      baseRequest
-        .delete(`/todos/${id}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then(() => {
-          getTodos(accessToken);
-        });
-    } catch (error) {
-      console.error(error);
+  const handleDelete = async id => {
+    const response = await deleteTodo(id, accessToken);
+
+    if (response === 204) {
+      const latestTodos = await getTodos(accessToken);
+      setList(latestTodos);
     }
   };
 
@@ -66,7 +59,7 @@ export default function TodoItem({ currTodo, accessToken }) {
           </button>
           <button
             data-testid="delete-button"
-            onClick={() => deleteTodo(currTodo.id)}>
+            onClick={() => handleDelete(currTodo.id)}>
             삭제
           </button>
         </>
