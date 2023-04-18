@@ -34,13 +34,13 @@ export default function SignupForm() {
     <form onSubmit={e => handleForm(e)}>
       <label id="email-input">email</label>
       <input
-        id="signup-email"
+        id="email-input"
         type="email"
         onChange={e => setEmail(e.target.value)}
       />
-      <label id="signup-password">password</label>
+      <label id="password-input">password</label>
       <input
-        id="signup-password"
+        id="password-input"
         type="password"
         onChange={e => setPassword(e.target.value)}
       />

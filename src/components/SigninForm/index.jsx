@@ -33,7 +33,7 @@ export default function SigninForm() {
     <form onSubmit={e => handleForm(e)}>
       <label id="email-input">email</label>
       <input data-testid="email-input" type="email" />
-      <label id="email-input">password</label>
+      <label id="password-input">password</label>
       <input data-testid="password-input" type="password" />
       <button data-testid="signin-button">Login</button>
     </form>
