@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { baseRequest } from "../../apis/core";
 import { getAccessToken, setAccessToken } from "../../utils/handleAccessToken";
+import { signInAuth } from "../../apis/auth";
 
 export default function SigninForm() {
   const navigate = useNavigate();
@@ -15,17 +15,12 @@ export default function SigninForm() {
 
   const handleForm = async e => {
     e.preventDefault();
-    try {
-      const response = await baseRequest.post("/auth/signin", {
-        email: e.target[0].value,
-        password: e.target[1].value,
-      });
-      if (response.status === 200) {
-        setAccessToken("access_token", response.data.access_token);
-        navigate("/todo");
-      }
-    } catch (error) {
-      console.error(error);
+
+    const response = await signInAuth(e.target[0].value, e.target[1].value);
+
+    if (response.status === 200) {
+      setAccessToken("access_token", response.data.access_token);
+      navigate("/todo");
     }
   };
 

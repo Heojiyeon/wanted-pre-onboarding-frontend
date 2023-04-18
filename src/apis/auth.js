@@ -1,8 +1,20 @@
 import { baseRequest } from "./core";
 
-const postAuth = async (email, password) => {
+const signUpAuth = async (email, password) => {
   try {
     const response = await baseRequest.post("/auth/signup", {
+      email,
+      password,
+    });
+    return response.status;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const signInAuth = async (email, password) => {
+  try {
+    const response = await baseRequest.post("/auth/signin", {
       email,
       password,
     });
@@ -12,4 +24,4 @@ const postAuth = async (email, password) => {
   }
 };
 
-export { postAuth };
+export { signUpAuth, signInAuth };

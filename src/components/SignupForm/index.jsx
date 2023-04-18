@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { baseRequest } from "../../apis/core";
-import { postAuth } from "../../apis/auth";
+import { signUpAuth } from "../../apis/auth";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -21,8 +20,8 @@ export default function SignupForm() {
   const handleForm = async e => {
     e.preventDefault();
 
-    const response = await postAuth(email, password);
-    if (response.status === 201) {
+    const response = await signUpAuth(email, password);
+    if (response === 201) {
       navigate("/signin");
     }
   };
