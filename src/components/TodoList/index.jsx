@@ -1,30 +1,17 @@
 import { useEffect, useState } from "react";
-import { baseRequest } from "../../apis/core";
+import { getTodos } from "../../apis/todos";
 import TodoItem from "../TodoItem";
 
 export default function TodoList({ accessToken, newTodo }) {
   const [list, setList] = useState("");
 
-  const getTodo = async accessToken => {
-    try {
-      await baseRequest
-        .get("/todos", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then(response => {
-          if (response.status === 200) {
-            setList(response.data);
-          }
-        });
-    } catch (error) {
-      console.error(error);
-    }
+  const getTodoList = async accessToken => {
+    const response = await getTodos(accessToken);
+    setList(response);
   };
   useEffect(() => {
     if (accessToken) {
-      getTodo(accessToken);
+      getTodoList(accessToken);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, newTodo]);
@@ -39,7 +26,6 @@ export default function TodoList({ accessToken, newTodo }) {
               currTodo={todo}
               currCompleted={todo.isCompleted}
               accessToken={accessToken}
-              getTodo={getTodo}
             />
           );
         })}

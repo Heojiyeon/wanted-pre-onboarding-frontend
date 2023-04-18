@@ -21,4 +21,17 @@ const postTodo = async (accessToken, todo) => {
   }
 };
 
-export { postTodo };
+const getTodos = async accessToken => {
+  try {
+    const response = await baseRequest.get("/todos", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { postTodo, getTodos };

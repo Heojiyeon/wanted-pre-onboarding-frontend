@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { baseRequest } from "../../apis/core";
+import { getTodos } from "../../apis/todos";
 
-export default function TodoItem({ currTodo, accessToken, getTodo }) {
+export default function TodoItem({ currTodo, accessToken }) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
   const [updatedTodo, setUpdatedTodo] = useState(currTodo.todo);
   const [edited, setEdited] = useState(false);
@@ -38,7 +39,7 @@ export default function TodoItem({ currTodo, accessToken, getTodo }) {
           },
         })
         .then(() => {
-          getTodo(accessToken);
+          getTodos(accessToken);
         });
     } catch (error) {
       console.error(error);
