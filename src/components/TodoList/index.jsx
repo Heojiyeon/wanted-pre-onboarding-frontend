@@ -24,7 +24,6 @@ export default function TodoList({ accessToken, newTodo }) {
             <TodoItem
               key={todo.id}
               currTodo={todo}
-              currCompleted={todo.isCompleted}
               accessToken={accessToken}
               setList={setList}
             />
