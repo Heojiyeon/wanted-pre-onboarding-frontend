@@ -47,4 +47,24 @@ const deleteTodo = async (id, accessToken) => {
   }
 };
 
-export { postTodo, getTodos, deleteTodo };
+const updateTodo = async (id, accessToken, completed, updatedTodo) => {
+  try {
+    const response = await baseRequest.put(
+      `/todos/${id}`,
+      {
+        todo: updatedTodo,
+        isCompleted: completed,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { postTodo, getTodos, deleteTodo, updateTodo };

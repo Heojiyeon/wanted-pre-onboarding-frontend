@@ -1,42 +1,31 @@
 import { useState } from "react";
-import { baseRequest } from "../../apis/core";
-import { getTodos, deleteTodo } from "../../apis/todos";
+import { deleteTodo, getTodos, updateTodo } from "../../apis/todos";
 
 export default function TodoItem({ currTodo, accessToken, setList }) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
   const [updatedTodo, setUpdatedTodo] = useState(currTodo.todo);
   const [edited, setEdited] = useState(false);
 
-  const updateTodo = async id => {
-    try {
-      await baseRequest
-        .put(
-          `/todos/${id}`,
-          {
-            todo: updatedTodo,
-            isCompleted: !completed,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then(() => {
-          setEdited(false);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDelete = async id => {
+  const handleDeleteTodo = async id => {
     const response = await deleteTodo(id, accessToken);
 
     if (response === 204) {
       const latestTodos = await getTodos(accessToken);
       setList(latestTodos);
     }
+  };
+
+  const handleUpdateTodo = async (id, completed) => {
+    const response = await updateTodo(id, accessToken, completed, updatedTodo);
+
+    if (response === 200) {
+      setEdited(false);
+    }
+  };
+
+  const hnadleCompleted = id => {
+    setCompleted(!completed);
+    handleUpdateTodo(id, !completed);
   };
 
   return (
@@ -47,8 +36,7 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
             <input
               type="checkbox"
               onChange={() => {
-                setCompleted(!completed);
-                updateTodo(currTodo.id);
+                hnadleCompleted(currTodo.id);
               }}
               checked={completed}
             />
@@ -59,7 +47,7 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
           </button>
           <button
             data-testid="delete-button"
-            onClick={() => handleDelete(currTodo.id)}>
+            onClick={() => handleDeleteTodo(currTodo.id)}>
             삭제
           </button>
         </>
@@ -71,7 +59,7 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
           />
           <button
             data-testid="submit-button"
-            onClick={() => updateTodo(currTodo.id)}>
+            onClick={() => handleUpdateTodo(currTodo.id, completed)}>
             제출
           </button>
           <button data-testid="cancel-button" onClick={() => setEdited(false)}>

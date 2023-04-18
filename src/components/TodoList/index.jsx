@@ -5,13 +5,13 @@ import TodoItem from "../TodoItem";
 export default function TodoList({ accessToken, newTodo }) {
   const [list, setList] = useState("");
 
-  const getTodoList = async accessToken => {
+  const handleGetTodos = async accessToken => {
     const response = await getTodos(accessToken);
     setList(response);
   };
   useEffect(() => {
     if (accessToken) {
-      getTodoList(accessToken);
+      handleGetTodos(accessToken);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, newTodo]);

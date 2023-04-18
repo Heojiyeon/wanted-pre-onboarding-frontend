@@ -1,7 +1,7 @@
 import { postTodo } from "../../apis/todos";
 
 export default function TodoForm({ accessToken, setNewTodo }) {
-  const handleTodo = async e => {
+  const handlePostTodo = async e => {
     e.preventDefault();
 
     const response = await postTodo(accessToken, e.target[0].value);
@@ -11,7 +11,7 @@ export default function TodoForm({ accessToken, setNewTodo }) {
   };
 
   return (
-    <form onSubmit={e => handleTodo(e)}>
+    <form onSubmit={e => handlePostTodo(e)}>
       <input data-testid="new-todo-input" />
       <button data-testid="new-todo-add-button">추가</button>
     </form>
