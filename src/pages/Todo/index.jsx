@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import TodoForm from "../../components/TodoForm";
-import { getAccessToken } from "../../utils/handleAccessToken";
 import TodoList from "../../components/TodoList";
+import { getAccessToken } from "../../utils/handleAccessToken";
 
 export default function Todo() {
   const navigate = useNavigate();

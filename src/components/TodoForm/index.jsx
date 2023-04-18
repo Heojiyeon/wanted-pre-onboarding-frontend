@@ -1,30 +1,12 @@
-import { baseRequest } from "../../apis/core";
+import { postTodo } from "../../apis/todos";
 
 export default function TodoForm({ accessToken, setNewTodo }) {
   const handleTodo = async e => {
     e.preventDefault();
 
-    try {
-      await baseRequest
-        .post(
-          "/todos",
-          {
-            todo: e.target[0].value,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then(response => {
-          setNewTodo(response.data);
-          console.log(response.data);
-        });
-    } catch (error) {
-      alert("올바르게 작성해주세요!");
-    }
+    const response = await postTodo(accessToken, e.target[0].value);
+    setNewTodo(response);
+
     e.target[0].value = "";
   };
 
