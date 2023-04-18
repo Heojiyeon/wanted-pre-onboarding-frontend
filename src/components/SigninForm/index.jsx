@@ -1,17 +1,9 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { getAccessToken, setAccessToken } from "../../utils/handleAccessToken";
 import { signInAuth } from "../../apis/auth";
+import { setAccessToken } from "../../utils/handleAccessToken";
 
 export default function SigninForm() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (getAccessToken("access_token")) {
-      navigate("/todo");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleForm = async e => {
     e.preventDefault();
