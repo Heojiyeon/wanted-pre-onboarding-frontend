@@ -1,28 +1,9 @@
 import { baseRequest } from "../../apis/core";
 import { useEffect, useState } from "react";
+import TodoItem from "../TodoItem";
 
 export default function TodoList({ accessToken, newTodo }) {
   const [list, setList] = useState("");
-
-  const updateTodo = id => {
-    console.log("update todo", id);
-  };
-
-  const deleteTodo = id => {
-    try {
-      baseRequest
-        .delete(`/todos/${id}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then(() => {
-          getTodo(accessToken);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const getTodo = async accessToken => {
     try {
@@ -53,22 +34,13 @@ export default function TodoList({ accessToken, newTodo }) {
       {list.length !== 0 &&
         list.map(todo => {
           return (
-            <li key={todo.id}>
-              <label>
-                <input type="checkbox" />
-                <span>{todo.todo}</span>
-              </label>
-              <button
-                data-testid="modify-button"
-                onClick={() => updateTodo(todo.id)}>
-                수정
-              </button>
-              <button
-                data-testid="delete-button"
-                onClick={() => deleteTodo(todo.id)}>
-                삭제
-              </button>
-            </li>
+            <TodoItem
+              key={todo.id}
+              currTodo={todo}
+              currCompleted={todo.isCompleted}
+              accessToken={accessToken}
+              getTodo={getTodo}
+            />
           );
         })}
     </ul>

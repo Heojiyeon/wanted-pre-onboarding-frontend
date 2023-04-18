@@ -7,7 +7,7 @@ import TodoList from "../../components/TodoList";
 export default function Todo() {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
-  const [newTodo, setNewTodo] = useState("");
+  const [newTodo, setNewTodo] = useState({});
 
   useEffect(() => {
     const token = getAccessToken("access_token");

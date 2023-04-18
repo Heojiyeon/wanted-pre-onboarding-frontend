@@ -19,7 +19,8 @@ export default function TodoForm({ accessToken, setNewTodo }) {
           }
         )
         .then(response => {
-          setNewTodo(response.data.todo);
+          setNewTodo(response.data);
+          console.log(response.data);
         });
     } catch (error) {
       alert("올바르게 작성해주세요!");
