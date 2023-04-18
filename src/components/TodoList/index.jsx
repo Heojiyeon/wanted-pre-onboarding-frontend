@@ -1,10 +1,8 @@
 import { baseRequest } from "../../apis/core";
 import { useEffect, useState } from "react";
-import { getAccessToken } from "../../utils/handleAccessToken";
 
-export default function TodoList() {
+export default function TodoList({ accessToken, newTodo }) {
   const [list, setList] = useState("");
-  const [token, setToken] = useState("");
 
   const updateTodo = id => {
     console.log("update todo", id);
@@ -15,11 +13,11 @@ export default function TodoList() {
       baseRequest
         .delete(`/todos/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         })
         .then(() => {
-          getTodo(token);
+          getTodo(accessToken);
         });
     } catch (error) {
       console.error(error);
@@ -44,13 +42,11 @@ export default function TodoList() {
     }
   };
   useEffect(() => {
-    const token = getAccessToken("access_token");
-    if (token) {
-      getTodo(token);
-      setToken(token);
+    if (accessToken) {
+      getTodo(accessToken);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [accessToken, newTodo]);
 
   return (
     <ul>

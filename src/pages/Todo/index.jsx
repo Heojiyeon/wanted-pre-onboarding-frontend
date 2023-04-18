@@ -7,6 +7,7 @@ import TodoList from "../../components/TodoList";
 export default function Todo() {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
+  const [newTodo, setNewTodo] = useState("");
 
   useEffect(() => {
     const token = getAccessToken("access_token");
@@ -18,8 +19,8 @@ export default function Todo() {
   }, []);
   return (
     <>
-      <TodoForm accessToken={accessToken} />
-      <TodoList accessToken={accessToken} />
+      <TodoForm accessToken={accessToken} setNewTodo={setNewTodo} />
+      <TodoList accessToken={accessToken} newTodo={newTodo} />
     </>
   );
 }
