@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { signInAuth } from "../../apis/auth";
 import { setAccessToken } from "../../utils/handleAccessToken";
-import { StyledSignupForm, StyledInput, StyledSignupButton } from "./style";
+import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
 export default function SigninForm() {
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 import { postTodo } from "../../apis/todos";
-import { StyledTodoForm, StyledTodoInput, StyledTodoButton } from "./style";
+import { StyledTodoButton, StyledTodoForm, StyledTodoInput } from "./style";
 
 export default function TodoForm({ accessToken, setNewTodo }) {
   const handlePostTodo = async e => {

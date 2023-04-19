@@ -1,23 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpAuth } from "../../apis/auth";
-import { StyledSignupForm, StyledInput, StyledSignupButton } from "./style";
+import { isValidEmail, isValidPassword } from "../../utils/validate/signup";
+import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
-  const isValidEmail = email => {
-    const regExp =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    return email.match(regExp);
-  };
-
-  const isValidPassword = password => {
-    return password.length >= 8 ? true : false;
-  };
 
   const handleForm = async e => {
     e.preventDefault();

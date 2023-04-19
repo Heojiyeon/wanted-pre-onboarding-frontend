@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAccessToken } from "../../utils/handleAccessToken";
-import { StyledLink, StyledLi, StyledContainer } from "./style";
+import { StyledContainer, StyledLi, StyledLink } from "./style";
 
 export default function Main() {
   const navigate = useNavigate();

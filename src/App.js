@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NotExist from "./components/NotExist";
 import Main from "./pages/Main";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Todo from "./pages/Todo";
-import NotExist from "./components/NotExist";
 
 export default function App() {
   return (
