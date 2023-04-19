@@ -3,17 +3,20 @@
 원티드 프리온보딩 프론트엔드 인턴쉽 사전 과제입니다.\
 ( This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). )
 
+## 배포 주소
+https://wanted-pre-onboarding-frontend-jet-chi.vercel.app/
+
 ## 프로젝트 실행 방법
 
-### 1. 
+
 ```
 git clone https://github.com/Heojiyeon/wanted-pre-onboarding-frontend.git
 ```
-### 2. 
+
 ```
 npm install
 ```
-### 3. 
+
 ```
 npm start
 ```
