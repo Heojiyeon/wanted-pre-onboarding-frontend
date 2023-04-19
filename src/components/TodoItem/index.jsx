@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { deleteTodo, getTodos, updateTodo } from "../../apis/todos";
 import {
-  StyledTodoContainer,
   StyledLi,
   StyledSpan,
   StyledTodoButton,
+  StyledTodoContainer,
 } from "./style";
 
 export default function TodoItem({ currTodo, accessToken, setList }) {
