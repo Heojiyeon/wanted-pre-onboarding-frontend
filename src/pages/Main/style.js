@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 const StyledContainer = styled.ul`
   position: absolute;
   width: 20rem;
-  top: 35%;
-  left: 35%;
+  top: 30%;
+  left: 40%;
+  padding: 0;
 `;
 
 const StyledLink = styled(Link)`

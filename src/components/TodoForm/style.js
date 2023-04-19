@@ -8,12 +8,12 @@ const StyledTodoForm = styled.form`
 `;
 
 const StyledTodoInput = styled.input`
-  width: 14rem;
+  width: 16rem;
 `;
 
 const StyledTodoButton = styled.button`
   width: 3rem;
-  margin-left: 1rem;
+  margin-left: 0.2rem;
   background: none;
   border: 0.2px solid;
 `;

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 import { getAccessToken } from "../../utils/handleAccessToken";
 import { StyledContainer, StyledLi, StyledLink } from "./style";
 
@@ -15,6 +16,7 @@ export default function Main() {
 
   return (
     <StyledContainer>
+      <Header title={"pre-onboarding"} />
       <StyledLi>
         회원이신가요? &nbsp;
         <StyledLink to="/signin">로그인</StyledLink>

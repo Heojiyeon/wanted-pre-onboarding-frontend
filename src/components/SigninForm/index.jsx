@@ -22,7 +22,9 @@ export default function SigninForm() {
       <StyledInput data-testid="email-input" type="email" />
       <label id="password-input">password</label>
       <StyledInput data-testid="password-input" type="password" />
-      <StyledSignupButton data-testid="signin-button">Login</StyledSignupButton>
+      <StyledSignupButton data-testid="signin-button">
+        Sign in
+      </StyledSignupButton>
     </StyledSignupForm>
   );
 }

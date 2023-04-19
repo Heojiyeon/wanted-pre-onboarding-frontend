@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { StyledNotExistContainer, StyledNotExistButton } from "./style";
+import { StyledNotExistButton, StyledNotExistContainer } from "./style";
 
 export default function NotExist() {
   const navigate = useNavigate();

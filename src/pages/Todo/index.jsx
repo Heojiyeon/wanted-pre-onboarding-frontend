@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import Header from "../../components/Header";
 import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList";
 import { getAccessToken } from "../../utils/handleAccessToken";
@@ -20,6 +21,7 @@ export default function Todo() {
   }, []);
   return (
     <StyledContainer>
+      <Header title={"TodoList"} />
       <TodoForm accessToken={accessToken} setNewTodo={setNewTodo} />
       <TodoList accessToken={accessToken} newTodo={newTodo} />
     </StyledContainer>

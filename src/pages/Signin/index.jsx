@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import Header from "../../components/Header";
 import SigninForm from "../../components/SigninForm";
 import { getAccessToken } from "../../utils/handleAccessToken";
 import { StyledContainer } from "./style";
@@ -16,6 +17,7 @@ export default function Signin() {
 
   return (
     <StyledContainer>
+      <Header title={"Signin"} />
       <SigninForm />
     </StyledContainer>
   );
