@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpAuth } from "../../apis/auth";
+import { StyledSignupForm, StyledInput, StyledSignupButton } from "./style";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const isValidEmail = email => {
@@ -27,24 +29,24 @@ export default function SignupForm() {
   };
 
   return (
-    <form onSubmit={e => handleForm(e)}>
+    <StyledSignupForm onSubmit={e => handleForm(e)}>
       <label id="email-input">email</label>
-      <input
+      <StyledInput
         id="email-input"
         type="email"
         onChange={e => setEmail(e.target.value)}
       />
       <label id="password-input">password</label>
-      <input
+      <StyledInput
         id="password-input"
         type="password"
         onChange={e => setPassword(e.target.value)}
       />
-      <button
+      <StyledSignupButton
         data-testid="signup-button"
         disabled={!(isValidPassword(password) && isValidEmail(email))}>
         Sign up
-      </button>
-    </form>
+      </StyledSignupButton>
+    </StyledSignupForm>
   );
 }

@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { deleteTodo, getTodos, updateTodo } from "../../apis/todos";
+import {
+  StyledTodoContainer,
+  StyledLi,
+  StyledSpan,
+  StyledTodoButton,
+} from "./style";
 
 export default function TodoItem({ currTodo, accessToken, setList }) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
@@ -29,9 +35,9 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
   };
 
   return (
-    <li>
+    <StyledLi>
       {!edited ? (
-        <>
+        <StyledTodoContainer>
           <label>
             <input
               type="checkbox"
@@ -40,33 +46,41 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
               }}
               checked={completed}
             />
-            <span>{updatedTodo}</span>
+            <StyledSpan>{updatedTodo}</StyledSpan>
           </label>
-          <button data-testid="modify-button" onClick={() => setEdited(true)}>
-            수정
-          </button>
-          <button
-            data-testid="delete-button"
-            onClick={() => handleDeleteTodo(currTodo.id)}>
-            삭제
-          </button>
-        </>
+          <div>
+            <StyledTodoButton
+              data-testid="modify-button"
+              onClick={() => setEdited(true)}>
+              수정
+            </StyledTodoButton>
+            <StyledTodoButton
+              data-testid="delete-button"
+              onClick={() => handleDeleteTodo(currTodo.id)}>
+              삭제
+            </StyledTodoButton>
+          </div>
+        </StyledTodoContainer>
       ) : (
-        <>
+        <StyledTodoContainer>
           <input
             data-testid="modify-input"
             onChange={e => setUpdatedTodo(e.target.value)}
           />
-          <button
-            data-testid="submit-button"
-            onClick={() => handleUpdateTodo(currTodo.id, completed)}>
-            제출
-          </button>
-          <button data-testid="cancel-button" onClick={() => setEdited(false)}>
-            취소
-          </button>
-        </>
+          <div>
+            <StyledTodoButton
+              data-testid="submit-button"
+              onClick={() => handleUpdateTodo(currTodo.id, completed)}>
+              제출
+            </StyledTodoButton>
+            <StyledTodoButton
+              data-testid="cancel-button"
+              onClick={() => setEdited(false)}>
+              취소
+            </StyledTodoButton>
+          </div>
+        </StyledTodoContainer>
       )}
-    </li>
+    </StyledLi>
   );
 }

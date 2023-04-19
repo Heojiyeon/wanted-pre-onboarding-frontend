@@ -1,4 +1,5 @@
 import { postTodo } from "../../apis/todos";
+import { StyledTodoForm, StyledTodoInput, StyledTodoButton } from "./style";
 
 export default function TodoForm({ accessToken, setNewTodo }) {
   const handlePostTodo = async e => {
@@ -11,9 +12,11 @@ export default function TodoForm({ accessToken, setNewTodo }) {
   };
 
   return (
-    <form onSubmit={e => handlePostTodo(e)}>
-      <input data-testid="new-todo-input" />
-      <button data-testid="new-todo-add-button">추가</button>
-    </form>
+    <StyledTodoForm onSubmit={e => handlePostTodo(e)}>
+      <StyledTodoInput data-testid="new-todo-input" />
+      <StyledTodoButton data-testid="new-todo-add-button">
+        추가
+      </StyledTodoButton>
+    </StyledTodoForm>
   );
 }

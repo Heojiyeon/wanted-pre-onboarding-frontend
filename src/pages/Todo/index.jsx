@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList";
 import { getAccessToken } from "../../utils/handleAccessToken";
+import { StyledContainer } from "./style";
 
 export default function Todo() {
   const navigate = useNavigate();
@@ -18,9 +19,9 @@ export default function Todo() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <>
+    <StyledContainer>
       <TodoForm accessToken={accessToken} setNewTodo={setNewTodo} />
       <TodoList accessToken={accessToken} newTodo={newTodo} />
-    </>
+    </StyledContainer>
   );
 }

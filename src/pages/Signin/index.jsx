@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import SigninForm from "../../components/SigninForm";
 import { getAccessToken } from "../../utils/handleAccessToken";
+import { StyledContainer } from "./style";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -14,8 +15,8 @@ export default function Signin() {
   }, []);
 
   return (
-    <div>
+    <StyledContainer>
       <SigninForm />
-    </div>
+    </StyledContainer>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTodos } from "../../apis/todos";
 import TodoItem from "../TodoItem";
+import { StyledUl } from "./style";
 
 export default function TodoList({ accessToken, newTodo }) {
   const [list, setList] = useState("");
@@ -9,6 +10,7 @@ export default function TodoList({ accessToken, newTodo }) {
     const response = await getTodos(accessToken);
     setList(response);
   };
+
   useEffect(() => {
     if (accessToken) {
       handleGetTodos(accessToken);
@@ -17,7 +19,7 @@ export default function TodoList({ accessToken, newTodo }) {
   }, [accessToken, newTodo]);
 
   return (
-    <ul>
+    <StyledUl>
       {list.length !== 0 &&
         list.map(todo => {
           return (
@@ -29,6 +31,6 @@ export default function TodoList({ accessToken, newTodo }) {
             />
           );
         })}
-    </ul>
+    </StyledUl>
   );
 }

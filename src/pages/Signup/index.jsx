@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../../components/SignupForm";
 import { getAccessToken } from "../../utils/handleAccessToken";
-
+import { StyledContainer } from "./style";
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -14,8 +14,8 @@ export default function Signup() {
   }, []);
 
   return (
-    <div>
+    <StyledContainer>
       <SignupForm />
-    </div>
+    </StyledContainer>
   );
 }
