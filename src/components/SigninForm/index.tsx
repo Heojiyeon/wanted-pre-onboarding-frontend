@@ -1,21 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { signUpAuth } from "../../apis/auth";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router";
+import { signInAuth } from "../../apis/auth";
+import { setAccessToken } from "../../utils/handleAccessToken";
 import { isValidEmail, isValidPassword } from "../../utils/validate/signup";
 import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
+import React from "react";
 
-export default function SignupForm() {
+export default function SigninForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleForm = async e => {
+  const handleForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await signUpAuth(email, password);
-    if (response === 201) {
-      navigate("/signin");
+    const response = await signInAuth(email, password);
+
+    if (response?.status === 200) {
+      setAccessToken("access_token", response.data.access_token);
+      navigate("/todo");
     }
   };
 
@@ -23,20 +27,20 @@ export default function SignupForm() {
     <StyledSignupForm onSubmit={e => handleForm(e)}>
       <label id="email-input">email</label>
       <StyledInput
-        id="email-input"
+        data-testid="email-input"
         type="email"
         onChange={e => setEmail(e.target.value)}
       />
       <label id="password-input">password</label>
       <StyledInput
-        id="password-input"
+        data-testid="password-input"
         type="password"
         onChange={e => setPassword(e.target.value)}
       />
       <StyledSignupButton
-        data-testid="signup-button"
+        data-testid="signin-button"
         disabled={!(isValidPassword(password) && isValidEmail(email))}>
-        Sign up
+        Sign in
       </StyledSignupButton>
     </StyledSignupForm>
   );
