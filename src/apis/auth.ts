@@ -1,6 +1,6 @@
 import { baseRequest } from "./core";
 
-const signUpAuth = async (email, password) => {
+const signUpAuth = async (email: string, password: string) => {
   try {
     const response = await baseRequest.post("/auth/signup", {
       email,
@@ -12,7 +12,7 @@ const signUpAuth = async (email, password) => {
   }
 };
 
-const signInAuth = async (email, password) => {
+const signInAuth = async (email: string, password: string) => {
   try {
     const response = await baseRequest.post("/auth/signin", {
       email,

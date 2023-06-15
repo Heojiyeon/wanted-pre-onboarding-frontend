@@ -1,6 +1,6 @@
 import { baseRequest } from "./core";
 
-const postTodo = async (accessToken, todo) => {
+const postTodo = async (accessToken: string, todo: String) => {
   try {
     const response = await baseRequest.post(
       "/todos",
@@ -21,7 +21,7 @@ const postTodo = async (accessToken, todo) => {
   }
 };
 
-const getTodos = async accessToken => {
+const getTodos = async (accessToken: String) => {
   try {
     const response = await baseRequest.get("/todos", {
       headers: {
@@ -34,7 +34,7 @@ const getTodos = async accessToken => {
   }
 };
 
-const deleteTodo = async (id, accessToken) => {
+const deleteTodo = async (id: string, accessToken: string) => {
   try {
     const response = await baseRequest.delete(`/todos/${id}`, {
       headers: {
@@ -47,7 +47,12 @@ const deleteTodo = async (id, accessToken) => {
   }
 };
 
-const updateTodo = async (id, accessToken, completed, updatedTodo) => {
+const updateTodo = async (
+  id: string,
+  accessToken: string,
+  completed: boolean,
+  updatedTodo: string
+) => {
   try {
     const response = await baseRequest.put(
       `/todos/${id}`,
