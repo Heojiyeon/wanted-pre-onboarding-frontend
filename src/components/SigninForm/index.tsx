@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import { signInAuth } from "../../apis/auth";
 import { setAccessToken } from "../../utils/handleAccessToken";
-import { isValidEmail, isValidPassword } from "../../utils/validate/signup";
+import { isValidEmail, isValidPassword } from "../../utils/validates";
 import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
 import React from "react";
 

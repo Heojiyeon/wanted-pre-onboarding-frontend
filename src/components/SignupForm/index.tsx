@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpAuth } from "../../apis/auth";
-import { isValidEmail, isValidPassword } from "../../utils/validate/signup";
+import { isValidEmail, isValidPassword } from "../../utils/validates";
 import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
 
 export default function SignupForm() {
