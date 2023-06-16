@@ -1,5 +1,5 @@
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NotExist from "./components/NotExist";
 import Main from "./pages/Main";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -9,11 +9,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route path="/*" element={<NotExist />} />
+        <Route element={<Main />} path="/" />
+        <Route element={<Signup />} path="/signup" />
+        <Route element={<Signin />} path="/signin" />
+        <Route element={<Todo />} path="/todo" />
       </Routes>
     </BrowserRouter>
   );

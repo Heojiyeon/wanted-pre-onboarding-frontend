@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { deleteTodo, getTodos, updateTodo } from "../../apis/todos";
 import {
   StyledLi,
@@ -6,13 +6,30 @@ import {
   StyledTodoButton,
   StyledTodoContainer,
 } from "./style";
+import React from "react";
 
-export default function TodoItem({ currTodo, accessToken, setList }) {
+interface TodoItemProps {
+  currTodo: currTodo;
+  accessToken: string;
+  setList: Dispatch<SetStateAction<never[]>>;
+}
+
+type currTodo = {
+  id: string;
+  isCompleted: boolean;
+  todo: string;
+};
+
+export default function TodoItem({
+  currTodo,
+  accessToken,
+  setList,
+}: TodoItemProps) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
   const [updatedTodo, setUpdatedTodo] = useState(currTodo.todo);
   const [edited, setEdited] = useState(false);
 
-  const handleDeleteTodo = async id => {
+  const handleDeleteTodo = async (id: string) => {
     const response = await deleteTodo(id, accessToken);
 
     if (response === 204) {
@@ -21,7 +38,7 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
     }
   };
 
-  const handleUpdateTodo = async (id, completed) => {
+  const handleUpdateTodo = async (id: string, completed: boolean) => {
     const response = await updateTodo(id, accessToken, completed, updatedTodo);
 
     if (response === 200) {
@@ -29,7 +46,7 @@ export default function TodoItem({ currTodo, accessToken, setList }) {
     }
   };
 
-  const hnadleCompleted = id => {
+  const hnadleCompleted = (id: string) => {
     setCompleted(!completed);
     handleUpdateTodo(id, !completed);
   };

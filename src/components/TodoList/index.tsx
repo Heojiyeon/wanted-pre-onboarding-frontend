@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getTodos } from "../../apis/todos";
+import { currTodo } from "../../utils/types";
 import TodoItem from "../TodoItem";
 import { StyledUl } from "./style";
 
-export default function TodoList({ accessToken, newTodo }) {
-  const [list, setList] = useState("");
+interface TodoListProps {
+  accessToken: string;
+  newTodo: string;
+}
 
-  const handleGetTodos = async accessToken => {
+export default function TodoList({ accessToken, newTodo }: TodoListProps) {
+  const [list, setList] = useState([]);
+
+  const handleGetTodos = async (accessToken: string) => {
     const response = await getTodos(accessToken);
     setList(response);
   };
@@ -21,7 +27,7 @@ export default function TodoList({ accessToken, newTodo }) {
   return (
     <StyledUl>
       {list.length !== 0 &&
-        list.map(todo => {
+        list.map((todo: currTodo) => {
           return (
             <TodoItem
               key={todo.id}
