@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { postTodo } from "../../apis/todos";
+import { currTodo } from "../../utils/types";
 import { StyledTodoButton, StyledTodoForm, StyledTodoInput } from "./style";
 
 interface TodoFormProps {
   accessToken: string;
-  setNewTodo: (val: string) => void;
+  setNewTodo: Dispatch<SetStateAction<currTodo | undefined>>;
 }
 
 export default function TodoForm({ accessToken, setNewTodo }: TodoFormProps) {

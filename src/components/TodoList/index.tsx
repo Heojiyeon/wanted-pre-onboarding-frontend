@@ -6,7 +6,7 @@ import { StyledUl } from "./style";
 
 interface TodoListProps {
   accessToken: string;
-  newTodo: string;
+  newTodo: currTodo | undefined;
 }
 
 export default function TodoList({ accessToken, newTodo }: TodoListProps) {
