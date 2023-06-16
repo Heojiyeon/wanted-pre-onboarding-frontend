@@ -4,6 +4,7 @@ import Main from "./pages/Main";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Todo from "./pages/Todo";
+import NotExist from "./pages/NotExist";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route element={<Signup />} path="/signup" />
         <Route element={<Signin />} path="/signin" />
         <Route element={<Todo />} path="/todo" />
+        <Route element={<NotExist />} path="/*" />
       </Routes>
     </BrowserRouter>
   );
