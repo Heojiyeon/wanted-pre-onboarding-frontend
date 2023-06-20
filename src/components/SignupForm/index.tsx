@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpAuth } from "../../apis/auth";
 import { isValidEmail, isValidPassword } from "../../utils/validates";
@@ -10,14 +10,17 @@ export default function SignupForm() {
 
   const navigate = useNavigate();
 
-  const handleForm = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleForm = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const response = await signUpAuth(email, password);
-    if (response === 201) {
-      navigate("/signin");
-    }
-  };
+      const response = await signUpAuth(email, password);
+      if (response === 201) {
+        navigate("/signin");
+      }
+    },
+    [email, navigate, password]
+  );
 
   return (
     <StyledSignupForm onSubmit={e => handleForm(e)}>

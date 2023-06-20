@@ -1,23 +1,27 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { postTodo } from "../../apis/todos";
 import { currTodo } from "../../utils/types";
 import { StyledTodoButton, StyledTodoForm, StyledTodoInput } from "./style";
 
 interface TodoFormProps {
   accessToken: string;
-  setNewTodo: Dispatch<SetStateAction<currTodo | undefined>>;
+  setTodoList: Dispatch<SetStateAction<currTodo[]>>;
 }
 
-export default function TodoForm({ accessToken, setNewTodo }: TodoFormProps) {
+export default function TodoForm({ accessToken, setTodoList }: TodoFormProps) {
   const [currTodo, setCurrTodo] = useState("");
-  const handlePostTodo = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    const response = await postTodo(accessToken, currTodo);
-    setNewTodo(response);
+  const handlePostTodo = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    setCurrTodo("");
-  };
+      const response = await postTodo(accessToken, currTodo);
+      setTodoList(prevList => [...prevList, response]);
+
+      setCurrTodo("");
+    },
+    [accessToken, currTodo, setTodoList]
+  );
 
   return (
     <StyledTodoForm onSubmit={e => handlePostTodo(e)}>

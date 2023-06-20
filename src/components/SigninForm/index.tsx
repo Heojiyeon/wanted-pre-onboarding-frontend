@@ -1,10 +1,10 @@
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import { signInAuth } from "../../apis/auth";
+import { ACCESS_TOKEN } from "../../utils/constants";
 import { setAccessToken } from "../../utils/handleAccessToken";
 import { isValidEmail, isValidPassword } from "../../utils/validates";
 import { StyledInput, StyledSignupButton, StyledSignupForm } from "./style";
-import React from "react";
 
 export default function SigninForm() {
   const [email, setEmail] = useState("");
@@ -12,16 +12,19 @@ export default function SigninForm() {
 
   const navigate = useNavigate();
 
-  const handleForm = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleForm = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const response = await signInAuth(email, password);
+      const response = await signInAuth(email, password);
 
-    if (response?.status === 200) {
-      setAccessToken("access_token", response.data.access_token);
-      navigate("/todo");
-    }
-  };
+      if (response?.status === 200) {
+        setAccessToken(ACCESS_TOKEN, response.data.access_token);
+        navigate("/todo");
+      }
+    },
+    [email, navigate, password]
+  );
 
   return (
     <StyledSignupForm onSubmit={e => handleForm(e)}>

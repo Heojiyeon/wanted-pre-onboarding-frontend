@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { deleteTodo, getTodos, updateTodo } from "../../apis/todos";
 import {
   StyledLi,
@@ -6,50 +6,59 @@ import {
   StyledTodoButton,
   StyledTodoContainer,
 } from "./style";
-import React from "react";
+
+import { currTodo } from "../../utils/types";
 
 interface TodoItemProps {
   currTodo: currTodo;
   accessToken: string;
-  setList: Dispatch<SetStateAction<never[]>>;
+  setTodoList: Dispatch<SetStateAction<currTodo[]>>;
 }
-
-type currTodo = {
-  id: string;
-  isCompleted: boolean;
-  todo: string;
-};
 
 export default function TodoItem({
   currTodo,
   accessToken,
-  setList,
+  setTodoList,
 }: TodoItemProps) {
   const [completed, setCompleted] = useState(currTodo.isCompleted);
   const [updatedTodo, setUpdatedTodo] = useState(currTodo.todo);
   const [edited, setEdited] = useState(false);
 
-  const handleDeleteTodo = async (id: string) => {
-    const response = await deleteTodo(id, accessToken);
+  const handleDeleteTodo = useCallback(
+    async (id: string) => {
+      const response = await deleteTodo(id, accessToken);
 
-    if (response === 204) {
-      const latestTodos = await getTodos(accessToken);
-      setList(latestTodos);
-    }
-  };
+      if (response === 204) {
+        const latestTodos = await getTodos(accessToken);
+        setTodoList(latestTodos);
+      }
+    },
+    [accessToken, setTodoList]
+  );
 
-  const handleUpdateTodo = async (id: string, completed: boolean) => {
-    const response = await updateTodo(id, accessToken, completed, updatedTodo);
+  const handleUpdateTodo = useCallback(
+    async (id: string, completed: boolean) => {
+      const response = await updateTodo(
+        id,
+        accessToken,
+        completed,
+        updatedTodo
+      );
 
-    if (response === 200) {
-      setEdited(false);
-    }
-  };
+      if (response === 200) {
+        setEdited(false);
+      }
+    },
+    [accessToken, updatedTodo]
+  );
 
-  const hnadleCompleted = (id: string) => {
-    setCompleted(!completed);
-    handleUpdateTodo(id, !completed);
-  };
+  const hnadleCompleted = useCallback(
+    (id: string) => {
+      setCompleted(!completed);
+      handleUpdateTodo(id, !completed);
+    },
+    [completed, handleUpdateTodo]
+  );
 
   return (
     <StyledLi>
