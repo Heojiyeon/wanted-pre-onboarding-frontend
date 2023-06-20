@@ -1,4 +1,4 @@
-# Wanted-pre-onboarding-frontend
+![React-App-Chrome-2023-06-20-16-06-41](https://github.com/Heojiyeon/wanted-pre-onboarding-frontend/assets/33304871/177a61ad-6d2b-4e5e-b5f4-1fff8c8c418c)# Wanted-pre-onboarding-frontend
 
 원티드 프리온보딩 프론트엔드 인턴쉽 사전 과제입니다.\
 ( This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). )
@@ -22,4 +22,5 @@ npm start
 ```
 
 ## 데모 영상
-![pre_onborading](https://user-images.githubusercontent.com/33304871/232960754-057b0ea4-6ca6-44d0-b8be-156a491d34dd.gif)
+![React-App-Chrome-2023-06-20-16-06-41](https://github.com/Heojiyeon/wanted-pre-onboarding-frontend/assets/33304871/8e4138ac-e7cf-4595-8cfc-56d5b09d576c)
+
