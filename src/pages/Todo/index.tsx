@@ -40,7 +40,7 @@ export default function Todo() {
       <TodoForm setTodoList={setTodoList} accessToken={accessToken} />
       <TodoList
         todoList={todoList}
-        accessToken={""}
+        accessToken={accessToken}
         setTodoList={setTodoList}
       />
     </StyledContainer>
