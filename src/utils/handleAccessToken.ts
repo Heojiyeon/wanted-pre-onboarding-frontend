@@ -6,4 +6,8 @@ const setAccessToken = (key: string, value: string) => {
   return window.localStorage.setItem(key, value);
 };
 
-export { getAccessToken, setAccessToken };
+const deleteAccessToken = (key: string) => {
+  return window.localStorage.removeItem(key);
+};
+
+export { getAccessToken, setAccessToken, deleteAccessToken };
