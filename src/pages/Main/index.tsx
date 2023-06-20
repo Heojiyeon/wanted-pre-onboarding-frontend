@@ -6,7 +6,7 @@ import {
   deleteAccessToken,
   getAccessToken,
 } from "../../utils/handleAccessToken";
-import { StyledContainer, StyledLi, StyledLink } from "./style";
+import { StyledButton, StyledContainer, StyledLi, StyledLink } from "./style";
 
 export default function Main() {
   const token = getAccessToken(ACCESS_TOKEN);
@@ -16,17 +16,17 @@ export default function Main() {
     return (
       <StyledContainer>
         <Header title={"환영합니다!"} />
-        <button onClick={() => navigate("/todo")}>
+        <StyledButton onClick={() => navigate("/todo")}>
           투두 리스트로 바로 가기
-        </button>
+        </StyledButton>
         <br />
-        <button
+        <StyledButton
           onClick={() => {
             deleteAccessToken("access_token");
             navigate("/");
           }}>
           로그아웃
-        </button>
+        </StyledButton>
       </StyledContainer>
     );
   } else {

@@ -7,6 +7,11 @@ const StyledContainer = styled.div`
   margin-top: 10rem;
 `;
 
+const StyledButton = styled.button`
+  width: 18rem;
+  margin-left: 40%;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: blue;
@@ -23,4 +28,4 @@ const StyledLi = styled.li`
   }
 `;
 
-export { StyledLink, StyledLi, StyledContainer };
+export { StyledLink, StyledButton, StyledLi, StyledContainer };
