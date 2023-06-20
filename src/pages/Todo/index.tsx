@@ -1,33 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import Header from "../../components/Header";
+import { getTodos } from "../../apis/todos";
 import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList";
+import Header from "../../components/common/Header";
+import { ACCESS_TOKEN } from "../../utils/constants";
 import { getAccessToken } from "../../utils/handleAccessToken";
-import { StyledContainer } from "./style";
 import { currTodo } from "../../utils/types";
+import { StyledContainer } from "./style";
 
 export default function Todo() {
-  const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
-  const [newTodo, setNewTodo] = useState<currTodo>();
+  const [todoList, setTodoList] = useState<currTodo[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = getAccessToken("access_token");
+    const token = getAccessToken(ACCESS_TOKEN);
 
-    if (token) {
-      setAccessToken(token);
-    }
+    const handleGetTodos = async (accessToken: string) => {
+      return await getTodos(accessToken);
+    };
+
+    const fetchData = async (token: string) => {
+      const todos = await handleGetTodos(token);
+      setTodoList(todos);
+    };
+
     if (!token) {
       navigate("/signin");
+    } else {
+      setAccessToken(token);
+      fetchData(token);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate]);
+
   return (
     <StyledContainer>
       <Header title={"TodoList"} />
-      <TodoForm accessToken={accessToken} setNewTodo={setNewTodo} />
-      <TodoList accessToken={accessToken} newTodo={newTodo} />
+      <TodoForm setTodoList={setTodoList} accessToken={accessToken} />
+      <TodoList
+        todoList={todoList}
+        accessToken={""}
+        setTodoList={setTodoList}
+      />
     </StyledContainer>
   );
 }
